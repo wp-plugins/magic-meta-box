@@ -1,9 +1,9 @@
 ﻿=== Magic Meta Box ===
 Contributors: elgreatly
 Tags: wordpress, meta, meta-box, custom-field
-Requires at least: 1.0
-Tested up to: 1.0
-Stable tag: 1.0
+Requires at least: 1.1
+Tested up to: 1.1
+Stable tag: 1.1
 License: GPLv2
 
 Magic Meta Box helps you to create easily custom meta boxes fields in post, page and custom post type. You can create repeated group fields and tabs.
@@ -12,7 +12,9 @@ Magic Meta Box helps you to create easily custom meta boxes fields in post, page
 
 Magic Meta Box plugin helps you to implement easily custom meta boxes or fields in any post, page and custom post type in wordpress. You can create repeated single fields or group fields. You can create tabs to make your custom fields user friendly. it has a lot of fields and It's easily integrate with your theme. Just use magic meta box plugin and feel happy.
 ### Features:-
-* Easy to use support a lot of fields
+* Easy to use 
+* support a lot of fields
+* Has hooks to add custom field types
 * placeholder for inputs
 * support repeated single fields
 * support repeated group of fields

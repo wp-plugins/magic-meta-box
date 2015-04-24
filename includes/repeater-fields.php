@@ -643,7 +643,11 @@ do{
 				</div>
 				<?php
 				break;
-        } ?>
+        } 
+		$opt['id'] = $field_id;
+		$opt['value'] = $value_field;
+        do_action('gs_add_custom_repeated_field_type', $opt);
+        ?>
         <?php
         } ?>
         <span class="removeMeta icon-cancel-circled" data-number_metabox="<?php echo self::$count_metabox ?>" data-number="<?php echo $repeat_count_add; ?>"></span>                        

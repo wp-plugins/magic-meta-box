@@ -393,6 +393,10 @@
 			<?php
 			break;
 	}
+$field['id'] = $id;
+$field['value'] = $value;
+do_action('gs_add_custom_field_type', $field);
+
 if (isset($desc)) {
     echo '<p class="metaboxDescription">' . $desc . '</p>';
 }
