@@ -1,8 +1,8 @@
 ﻿=== Magic Meta Box ===
 Contributors: elgreatly
 Tags: wordpress, meta, meta-box, custom-field
-Requires at least: 1.1
-Tested up to: 1.1
+Requires at least: 4.0
+Tested up to: 4.1.3
 Stable tag: 1.1
 License: GPLv2
 
