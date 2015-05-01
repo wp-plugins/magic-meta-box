@@ -5,6 +5,11 @@
 				<?php if(isset($placeholder) && !empty($placeholder)){  ?> placeholder="<?php echo $placeholder ?>" <?php } ?>  />
 			<?php
 			break;
+		case 'password': ?>
+				<input type="password" name="<?php echo $id ?>" id="<?php echo $id ?>" value="<?php echo esc_attr($value); ?>" <?php if(isset($pattern) && !empty($pattern)){  ?> pattern="<?php echo $pattern ?>" <?php } ?> 
+				<?php if(isset($placeholder) && !empty($placeholder)){  ?> placeholder="<?php echo $placeholder ?>" <?php } ?>  />
+			<?php
+			break;
 		case 'textarea': ?>
 			<textarea name="<?php echo $id ?>" id="<?php echo $id ?>" rows="<?php echo isset($row)? $row : '5' ?>" cols="<?php echo isset($cols)? $cols : '50' ?>" 
 			<?php if(isset($placeholder) && !empty($placeholder)){  ?> placeholder="<?php echo $placeholder ?>" <?php } ?> ><?php echo esc_attr($value); ?></textarea>
@@ -92,7 +97,11 @@
 			break;
 		case 'select': ?>
 			<select class="selectMetabox" name="<?php echo $id ?>" id="<?php echo $id ?>">
-				<option value="default">Select an Option</option>
+				<?php if(!empty($default_option)){ ?>
+					<option value="default"><?php echo $default_option ?></option>
+				<?php }else{ ?>
+					<option value="default">Select an Option</option>
+				<?php } ?>
 				<?php if(!empty($options)){ ?>
 					<?php foreach ($options as $opt_value=>$opt_name): ?>
 						<option <?php selected($value, $opt_value)?> value="<?php echo $opt_value ?>"><?php echo $opt_name?></option>
@@ -316,7 +325,11 @@
 						if(!empty($value['url'])){
 							if(strrpos($value['url'],'.jpg') || strrpos($value['url'],'.jpeg') || strrpos($value['url'],'.png') || strrpos($value['url'],'.gif') ){ ?>
 								<img src="<?php if ( isset ( $value['url'] ) ){ echo $value['url']; } ?>" id="<?php echo $id ?>_file" />
-							<?php }else{ ?>
+							<?php }elseif(strrpos($value['url'],'.mp4') || strrpos($value['url'],'.webm') || strrpos($value['url'],'.mkv') || strrpos($value['url'],'.flv') || strrpos($value['url'],'.vob') || strrpos($value['url'],'.ogv') || strrpos($value['url'],'.ogg') || strrpos($value['url'],'.drc') || strrpos($value['url'],'.mng') || strrpos($value['url'],'.avi') || strrpos($value['url'],'.mov') || strrpos($value['url'],'.wmv') || strrpos($value['url'],'.yuv') || strrpos($value['url'],'.rmvb') || strrpos($value['url'],'.rm') || strrpos($value['url'],'.m4p') || strrpos($value['url'],'.m4v') || strrpos($value['url'],'.mpg') || strrpos($value['url'],'.mp2') || strrpos($value['url'],'.svi') || strrpos($value['url'],'.mxf') || strrpos($value['url'],'.qt')){ ?>
+									<img src="<?php echo includes_url() ?>images/media/video.png" id="<?php echo $id ?>_file" />
+							<?php }elseif(strrpos($value['url'],'.mp3') || strrpos($value['url'],'.mpc') || strrpos($value['url'],'.msv') || strrpos($value['url'],'.wav') || strrpos($value['url'],'.mmf') || strrpos($value['url'],'.m4a') || strrpos($value['url'],'.wma') || strrpos($value['url'],'.wv')){ ?>
+									<img src="<?php echo includes_url() ?>images/media/audio.png" id="<?php echo $id ?>_file" />
+								<?php }else{ ?>
 								<img src="<?php echo includes_url() ?>images/media/document.png" id="<?php echo $id ?>_file" />
 							<?php } ?>
 						<?php }else { ?>
@@ -352,7 +365,7 @@
 					<span class="showSliderValue"><?php echo $value; ?></span>
 					<div class="clearfix">
 						<span class="minSlider"><?php echo $min ?></span>
-						<div class="sliderMetabox" data-animate="<?php echo $speed ?>" data-max="<?php echo $max ?>" data-min="<?php echo $min ?>" data-orientation="<?php echo $orientation ?>"
+						<div class="sliderMetabox" data-content="<?php echo $value ?>" data-animate="<?php echo $speed ?>" data-max="<?php echo $max ?>" data-min="<?php echo $min ?>" data-orientation="<?php echo $orientation ?>"
 							 data-range="<?php echo $range ?>" data-step="<?php echo $step ?>" data-value="<?php echo isset($value)? $value : $slider_value ?>" data-values="<?php echo $slider_values ?>" 
 							 name="<?php echo $id ?>_slider" id="<?php echo $id ?>_slider"></div>
 						<span class="maxSlider"><?php echo $max ?></span>
@@ -363,6 +376,12 @@
 			break;
 		case 'map': ?>
 			<div class="mapMetaboxContainer">
+				<?php 
+					$fieldattrs = $field;
+					$fieldattrs['id'] = $id;
+					$fieldattrs['value'] = $value;
+					do_action('add_map_fields', $fieldattrs); 
+				?>
 				<input type="text" name="mapInput" class="controls" id="mapInput" />
 				<div class="mapMetabox" style="width: 100%;height: 300px;"></div>
 				<input type="hidden" class="markerPositionLat" name="<?php echo $id; ?>[lat]" id="<?php echo $id; ?>[lat]" value="<?php echo (isset($value['lat']) && !empty($value['lat']))? $value['lat'] : 27.0881198382541 ?>" />
@@ -393,9 +412,10 @@
 			<?php
 			break;
 	}
-$field['id'] = $id;
-$field['value'] = $value;
-do_action('gs_add_custom_field_type', $field);
+$fieldattrs = $field;
+$fieldattrs['id'] = $id;
+$fieldattrs['value'] = $value;
+do_action('gs_add_custom_field_type', $fieldattrs);
 
 if (isset($desc)) {
     echo '<p class="metaboxDescription">' . $desc . '</p>';
@@ -409,6 +429,7 @@ $placeholder = '';
 $tab = '';
 $options = array();
 $post_type = '';
+$default_option = '';
 $taxonomy_type = array();
 $selected_taxonomy = array();
 $relation = 'OR';

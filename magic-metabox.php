@@ -3,7 +3,7 @@
 Plugin Name: Magic Meta Box
 Plugin URI: https://wordpress.org/plugins/magic-meta-box/
 Description: Easy To Create Metabox For Your Theme
-Version: 1.1
+Version: 1.2
 Author: Abdelrhman ElGreatly
 License: GPLv2
 */
@@ -86,8 +86,10 @@ class MagicMetaBox {
             wp_localize_script('metaboxFile', 'meta_file', array(
                 'title' => __('Upload an file', 'gs_metabox'),
                 'button' => __('Use this file', 'gs_metabox'),
-                'pdf_image' => includes_url() . 'images/media/document.png'
-                    )
+                'pdf_image' => includes_url() . 'images/media/document.png',
+                'video_image' => includes_url() . 'images/media/video.png',
+                'audio_image' => includes_url() . 'images/media/audio.png',
+               )
             );
             wp_enqueue_script('metaboxFile');
             // Add the color picker css file

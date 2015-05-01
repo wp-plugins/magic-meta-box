@@ -174,6 +174,15 @@ textarea {
 }
 .sliderMetaboxContainer .sliderMetabox {
 	width: 92%;
+	position: relative;
+}
+.sliderMetaboxContainer .sliderMetabox:before {
+	content: '';
+  	position: absolute;
+  	background: #B7B7B7;
+  	left: 0;
+  	top: 0;
+  	height: 100%;
 }
 .sliderMetaboxContainer .minSlider {
 	margin-left: 0;

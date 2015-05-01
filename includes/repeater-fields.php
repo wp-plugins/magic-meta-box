@@ -36,6 +36,24 @@ do{
                 </div>
                 <?php
                 break;
+			case 'password': ?>
+                <div class="elementContent">
+                    <div class="metaLabelContainer">
+                        <label for="<?php echo $field_id; ?>"><?php echo $opt['name'] ?></label>
+                    </div>
+                    <div class="contentMetaDesc">
+                        <input type="password" name="<?php echo $field_id ?>" id="<?php echo $field_id ?>"
+                         value="<?php echo esc_attr($value_field) ?>" <?php if(isset($opt['pattern']) && !empty($opt['pattern'])){  ?> pattern="<?php echo $opt['pattern'] ?>" <?php } ?>
+                         <?php if(isset($opt['placeholder']) && !empty($opt['placeholder'])){  ?> placeholder="<?php echo $opt['placeholder'] ?>" <?php } ?> />
+               		</div>
+               		<?php 
+               			if(isset($opt['desc'])) {
+							echo '<p class="metaboxDescription">'.$opt['desc'].'</p>';
+						}
+               		?>
+                </div>
+                <?php
+                break;
 			case 'textarea': ?>      
                 <div class="elementContent">
                     <div class="metaLabelContainer">
@@ -257,7 +275,11 @@ do{
                     </div>
                     <div class="contentMetaDesc selectContainer">
                         <select class="select selectMetabox" name="<?php echo $field_id ?>" id="<?php echo $field_id ?>">
-                                <option value="default">Select an Option</option>
+                                <?php if(!empty($opt['default_option'])){ ?>
+									<option value="default"><?php echo $opt['default_option']; ?></option>
+								<?php }else{ ?>
+									<option value="default">Select an Option</option>
+								<?php } ?>
                                 <?php if(!empty($opt['options'])){ ?>
 	                                <?php foreach ($opt['options'] as $opt_value=>$opt_name): ?>
 	                                        <option <?php isset($value_field)? selected($value_field, $opt_value) : '' ?> value="<?php echo $opt_value?>"><?php echo $opt_name?></option>
@@ -544,14 +566,25 @@ do{
                         <label for="<?php echo $field_id ?>"><?php echo $opt['name'] ?></label>
                     </div>
                     <div class="contentMetaDesc">
-						<div class="imageUploadMeta <?php echo !empty($$value_field['url'])? 'activeImage' : '' ?>">
-							<div class="metaboxImage">
-								<?php if(strrpos($value_field['url'],'.jpg') || strrpos($value_field['url'],'.jpeg') || strrpos($value_field['url'],'.png') || strrpos($value_field['url'],'.gif') ){ ?>
-									<img src="<?php echo isset($value_field['url'])? $value_field['url'] : '' ?>" id="<?php echo $id ?>_file" />
-								<?php }else{ ?>
-									<img src="<?php echo includes_url() ?>images/media/document.png" id="<?php echo $id ?>_file" />
-								<?php } ?>
-								<div class="removeImage"></div>
+						<div class="imageUploadMeta <?php echo !empty($value_field['url'])? 'activeImage' : '' ?>">
+							<div class="filesContent">
+								<div class="metaboxImage">
+									<?php if(strrpos($value_field['url'],'.jpg') || strrpos($value_field['url'],'.jpeg') || strrpos($value_field['url'],'.png') || strrpos($value_field['url'],'.gif') ){ ?>
+										<img src="<?php echo isset($value_field['url'])? $value_field['url'] : '' ?>" id="<?php echo $id ?>_file" />
+									<?php }elseif(strrpos($value_field['url'],'.mp4') || strrpos($value_field['url'],'.webm') || strrpos($value_field['url'],'.mkv') || strrpos($value_field['url'],'.flv') || strrpos($value_field['url'],'.vob') || strrpos($value_field['url'],'.ogv') || strrpos($value_field['url'],'.ogg') || strrpos($value_field['url'],'.drc') || strrpos($value_field['url'],'.mng') || strrpos($value_field['url'],'.avi') || strrpos($value_field['url'],'.mov') || strrpos($value_field['url'],'.wmv') || strrpos($value_field['url'],'.yuv') || strrpos($value_field['url'],'.rmvb') || strrpos($value_field['url'],'.rm') || strrpos($value_field['url'],'.m4p') || strrpos($value_field['url'],'.m4v') || strrpos($value_field['url'],'.mpg') || strrpos($value_field['url'],'.mp2') || strrpos($value_field['url'],'.svi') || strrpos($value_field['url'],'.mxf') || strrpos($value_field['url'],'.qt')){ ?>
+										<img src="<?php echo includes_url() ?>images/media/video.png" id="<?php echo $id ?>_file" /> 
+									<?php }elseif(strrpos($value_field['url'],'.mp3') || strrpos($value_field['url'],'.mpc') || strrpos($value_field['url'],'.msv') || strrpos($value_field['url'],'.wav') || strrpos($value_field['url'],'.mmf') || strrpos($value_field['url'],'.m4a') || strrpos($value_field['url'],'.wma') || strrpos($value_field['url'],'.wv')){ ?>
+										<img src="<?php echo includes_url() ?>images/media/audio.png" id="<?php echo $id ?>_file" /> 
+									<?php }else{ ?>
+										<img src="<?php echo includes_url() ?>images/media/document.png" id="<?php echo $id ?>_file" />
+									<?php } ?>
+									<div class="removeImage"></div>
+								</div>
+								<div class="metaboxImageTitle">
+									<a href="<?php echo isset($value_field['edit'])? $value_field['edit'] : ''  ?>">
+										<p><?php echo isset($value_field['title'])? $value_field['title'] : '' ?></p>
+									</a>
+								</div>
 							</div>
 						  <input type="hidden" class="holdURL" name="<?php echo $field_id ?>[url]" id="<?php echo $field_id ?>_url" 
 						    		value="<?php if ( isset ( $value_field['url'] ) ){ echo $value_field['url']; } ?>" />
@@ -605,12 +638,12 @@ do{
 							<span class="showSliderValue"><?php echo isset($value_field)? $value_field : $opt['slider_value']; ?></span>
 							<div class="clearfix">
 								<span class="minSlider"><?php echo $opt['min'] ?></span>
-								<div class="sliderMetabox" data-animate="<?php echo $speed ?>" data-max="<?php echo $max ?>" data-min="<?php echo $min ?>" data-orientation="<?php echo $orientation ?>"
+								<div class="sliderMetabox" data-content="0" data-animate="<?php echo $speed ?>" data-max="<?php echo $max ?>" data-min="<?php echo $min ?>" data-orientation="<?php echo $orientation ?>"
 									 data-range="<?php echo $range ?>" data-step="<?php echo $step ?>" data-value="<?php echo isset($value_field)? $value_field : $opt['slider_value'] ?>" data-values="<?php echo $opt['slider_value'] ?>" 
-									 name="<?php echo $field_id ?>_slider" id="<?php echo $field_id ?>_slider"></div>
+									 name="<?php echo $field_id ?>_slider" id="<?php echo $id ?>-<?php echo $count_repeat ?>-<?php echo $opt['id'] ?>_slider"></div>
 								<span class="maxSlider"><?php echo $opt['max'] ?></span>
 							</div>
-							<input type="hidden" class="inputSliderMetabox" name="<?php echo $id ?>[<?php echo $count_repeat ?>][<?php echo $opt['id'] ?>]" id="<?php echo $id ?>[<?php echo $count_repeat ?>][<?php echo $opt['id'] ?>]" value="<?php echo isset($value_field)? $value_field : $opt['slider_value'] ?>" />
+							<input type="hidden" class="inputSliderMetabox" name="<?php echo $id ?>[<?php echo $count_repeat ?>][<?php echo $opt['id'] ?>]" id="<?php echo $id ?>-<?php echo $count_repeat ?>-<?php echo $opt['id'] ?>" value="<?php echo isset($value_field)? $value_field : $opt['slider_value'] ?>" />
 						</div>
                		</div>
                		<?php 
@@ -644,9 +677,10 @@ do{
 				<?php
 				break;
         } 
-		$opt['id'] = $field_id;
-		$opt['value'] = $value_field;
-        do_action('gs_add_custom_repeated_field_type', $opt);
+		$fieldopt = $opt;
+		$fieldopt['id'] = $field_id;
+		$fieldopt['value'] = $value_field;
+        do_action('gs_add_custom_repeated_field_type', $fieldopt);
         ?>
         <?php
         } ?>
@@ -678,6 +712,7 @@ $opt['placeholder'] = '';
 $opt['tab'] = '';
 $opt['options'] = array();
 $opt['post_type'] = '';
+$opt['default_option'] = '';
 $opt['taxonomy_type'] = array();
 $opt['selected_taxonomy'] = array();
 $opt['relation'] = 'OR';

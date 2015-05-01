@@ -36,9 +36,12 @@ jQuery(document).ready(function($){
             var str = media_attachment.url;
             if (str.match(".jpg$") || str.match(".jpeg$") || str.match(".png$") || str.match(".gif$") ) {
             	$this.parents('.imageUploadMeta').find('img').attr('src', media_attachment.url);
-            }else{
+            }else if(str.match(".mp4$") || str.match(".webm$") || str.match(".mkv$") || str.match(".flv$") || str.match(".vob$") || str.match(".ogv$") || str.match(".ogg$") || str.match(".drc$") || str.match(".mng$") || str.match(".avi$") || str.match(".mov$") || str.match(".wmv$") || str.match(".yuv$") || str.match(".rmvb$") || str.match(".rm$") || str.match(".m4p$") || str.match(".m4v$") || str.match(".mpg$") || str.match(".mp2$") || str.match(".svi$") || str.match(".mxf$") || str.match(".qt$")){
+            	$this.parents('.imageUploadMeta').find('img').attr('src', meta_file.video_image);
+            }else if(str.match(".mp3$") || str.match(".mpc$") || str.match(".msv$") || str.match(".wav$") || str.match(".mmf$") || str.match(".m4a$") || str.match(".wma$") || str.match(".wv$")){
+            	$this.parents('.imageUploadMeta').find('img').attr('src', meta_file.audio_image);
+            }else {
             	$this.parents('.imageUploadMeta').find('img').attr('src', meta_file.pdf_image);
-            	console.log($this.parents('.imageUploadMeta').find('img').attr('src'));
             }
             $this.parents('.imageUploadMeta').find('.metaboxImageTitle p').html(media_attachment.title);
             $this.parents('.imageUploadMeta').find('img').parent().css({'display': 'block'});

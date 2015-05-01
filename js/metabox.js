@@ -137,7 +137,7 @@ $(document).ready(function() {
 			slide: function(event, ui) { 
 			    $(this).closest('.sliderMetaboxContainer').find('.inputSliderMetabox').val(ui.value);
 			    $(this).closest('.sliderMetaboxContainer').find('.showSliderValue').text(ui.value);
-			}
+			},
 		});
 	});
 	/* Slider End */
