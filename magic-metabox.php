@@ -3,7 +3,7 @@
 Plugin Name: Magic Meta Box
 Plugin URI: https://wordpress.org/plugins/magic-meta-box/
 Description: Easy To Create Metabox For Your Theme
-Version: 1.2
+Version: 2.0
 Author: Abdelrhman ElGreatly
 License: GPLv2
 */
@@ -14,6 +14,7 @@ class MagicMetaBox {
     static $prefix = '_mmb-gs_';
 	static $count_metabox = 0;
 	static $count_repeat_js = array();
+	static $show_metabox = array();
     // create meta box based on given data
     public function __construct($id, $opts) {
        	require_once plugin_dir_path( __FILE__ ) . 'shortcode/shortcode.php';
@@ -94,6 +95,8 @@ class MagicMetaBox {
             wp_enqueue_script('metaboxFile');
             // Add the color picker css file
             wp_register_script('metabox_js', plugins_url( 'js/metabox.js', __FILE__ ), array('wp-color-picker', 'jquery-ui-datepicker', 'jquery-ui-spinner', 'jquery-ui-slider'));
+			
+			wp_register_script('show-hide-metabox', plugins_url( 'js/show-hide-metabox.js', __FILE__ ), array('jquery'));
         }
     }
 
@@ -124,6 +127,27 @@ class MagicMetaBox {
         }
         $options = '';
         $repeat_count_add = 0;
+		if(isset($this->meta_box['show']) && !empty($this->meta_box['show'])){
+			foreach ($this->meta_box['show'] as $key => $metaboxShow) {
+				if($key != 'template' && $key != 'post_format' && $key != 'relation'){
+					for($i = 0; $i < count($this->meta_box['show'][$key]); $i++){
+						if(is_string($metaboxShow[$i])){
+							$term_obj = get_term_by('name', $metaboxShow[$i], $key);
+							$this->meta_box['show'][$key][$i] = $term_obj->term_id;
+						}
+					}
+				}
+			}
+			if(!isset($this->meta_box['show']['relation']) || empty($this->meta_box['show']['relation'])){
+				$this->meta_box['show']['relation'] = 'or';
+			}
+			self::$show_metabox[$this->id] = $this->meta_box['show'];
+			$show_metabox = array(
+	            'show' => self::$show_metabox,
+	        );
+			wp_localize_script('show-hide-metabox', 'gs_show_hide', $show_metabox);
+			wp_enqueue_script('show-hide-metabox');
+		}
         foreach ($this->meta_box['fields'] as $field) {
             extract($field);
             $id = self::$prefix . $id;

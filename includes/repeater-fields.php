@@ -14,7 +14,10 @@ do{
     	$value_field;
 		$field_id =  $id .'[' .$count_repeat . '][' . $opt['id'] .']';
     	if(!isset($data[$count_repeat][$opt['id']])) {
-			$value_field = isset($opt['std']) ? $opt['std'] : '';
+			$value_field = isset($opt['std'])? $opt['std'] : '';
+		}
+		if(!isset($opt['std'])) {
+			$opt['std'] = '';
 		}
     	$value_field = isset($data[$count_repeat][$opt['id']])? $data[$count_repeat][$opt['id']] : $opt['std'];
         switch($opt['type']){

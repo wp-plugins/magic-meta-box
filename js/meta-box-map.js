@@ -1,6 +1,4 @@
 jQuery(document).ready(function($){
-	//$('.mapMetaboxContainer').closest('tr').css({'display': 'table-column', 'visibility': 'hidden', 'height': 0, 'overflow': 'hidden'});
-	//$('.mapMetaboxContainer').closest('tr').find('th').css({'vertical-align': 'baseline'});
 	var	marker_position = new google.maps.LatLng(map_dinamic_options.lat, map_dinamic_options.lng);
 	var	map_position = new google.maps.LatLng(map_dinamic_options.lat, map_dinamic_options.lng);
 	var	zoom = parseInt(map_dinamic_options.zoom);
@@ -70,6 +68,7 @@ jQuery(document).ready(function($){
 						$(this).removeClass('showTab');
 						$(this).addClass('hideTab');
 					}
+					$('.tabsMetabox').addClass('showHideOpen');
 				});
 			});
 			$('.tabsMetabox').each(function(){

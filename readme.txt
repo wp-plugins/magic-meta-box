@@ -3,7 +3,7 @@ Contributors: elgreatly
 Tags: wordpress, meta, meta-box, custom-field
 Requires at least: 4.0
 Tested up to: 4.1.3
-Stable tag: 1.2
+Stable tag: 2.0
 License: GPLv2
 
 Magic Meta Box helps you to create easily custom meta boxes fields in post, page and custom post type. You can create repeated group fields and tabs.
@@ -13,16 +13,17 @@ Magic Meta Box helps you to create easily custom meta boxes fields in post, page
 Magic Meta Box plugin helps you to implement easily custom meta boxes or fields in any post, page and custom post type in wordpress. You can create repeated single fields or group fields. You can create tabs to make your custom fields user friendly. it has a lot of fields and It's easily integrate with your theme. Just use magic meta box plugin and feel happy.
 ### Features:-
 * Easy to use 
-* support a lot of fields
+* Support a lot of fields
 * Has hooks to add custom field types
-* placeholder for inputs
-* support repeated single fields
-* support repeated group of fields
-* repeat editor field
-* support tabs to make your custom fields user friendly
+* Placeholder for inputs
+* Support repeated single fields
+* Support repeated group of fields
+* Repeat editor field
+* Show/Hide meta box with (javascript)
+* Support tabs to make your custom fields user friendly
 * Cross browsing
-* shortcode for Google map to make map field user friendly
-* easily integrate with your theme
+* Shortcode for Google map to make map field user friendly
+* Easily integrate with your theme
 ### Documentation
 * [Documentation PDF](http://www.mediafire.com/view/6f5wcf690q7gunq/Magic_Meta_Box_Documentation.pdf)
 
@@ -46,3 +47,8 @@ Magic Meta Box plugin helps you to implement easily custom meta boxes or fields 
 * Special icon when upload audio, video, pdf
 * add attribute to change default first option in select type
 * add password field type
+
+### 2.0
+
+* Show/Hide meta box with (javascript)
+* Fix some bugs
