@@ -3,7 +3,7 @@
 Plugin Name: Magic Meta Box
 Plugin URI: https://wordpress.org/plugins/magic-meta-box/
 Description: Easy To Create Metabox For Your Theme
-Version: 2.0
+Version: 2.2
 Author: Abdelrhman ElGreatly
 License: GPLv2
 */
