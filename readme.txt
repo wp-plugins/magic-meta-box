@@ -52,3 +52,7 @@ Magic Meta Box plugin helps you to implement easily custom meta boxes or fields 
 
 * Show/Hide meta box with (javascript)
 * Fix some bugs
+
+### 2.2
+
+* Fix Map field

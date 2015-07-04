@@ -79,8 +79,8 @@ jQuery(document).ready(function($){
 	function set_new_position_marker(event) {
 		var	new_position = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
 		marker.setPosition(new_position);
-		$('.mapMetaboxContainer .markerPositionLat').val(marker.getPosition().k);
-	    $('.mapMetaboxContainer .markerPositionLng').val(marker.getPosition().D);
+		$('.mapMetaboxContainer .markerPositionLat').val(marker.getPosition().A);
+	    $('.mapMetaboxContainer .markerPositionLng').val(marker.getPosition().F);
 	    $('.mapMetaboxContainer .mapZoom').val(map.getZoom());
 	}
 	function toggleBounce() {
@@ -92,8 +92,8 @@ jQuery(document).ready(function($){
 	}
 	
 	function get_position_marker(){
-	    $('.mapMetaboxContainer .markerPositionLat').val(marker.getPosition().k);
-	    $('.mapMetaboxContainer .markerPositionLng').val(marker.getPosition().D);
+	    $('.mapMetaboxContainer .markerPositionLat').val(marker.getPosition().A);
+	    $('.mapMetaboxContainer .markerPositionLng').val(marker.getPosition().F);
 	    $('.mapMetaboxContainer .mapZoom').val(map.getZoom());
 	}
 	
